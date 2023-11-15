@@ -1,7 +1,15 @@
 export default function CreateGame() {
+
+    const createGameSubmitHandler = (e) => {
+        e.preventDefault();
+
+        const gameData = Object.fromEntries(new FormData(e.currentTarget));
+        console.log(gameData);
+
+    }
     return (
         <section id="create-page" clasNames="auth">
-            <form id="create">
+            <form id="create" onSubmit={createGameSubmitHandler}>
                 <div className="container">
 
                     <h1>Create Game</h1>
