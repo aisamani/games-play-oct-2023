@@ -1,14 +1,28 @@
+import * as gammeService from '../../services/gameService';
+import { useNavigate } from 'react-router-dom';
 export default function CreateGame() {
 
-    const createGameSubmitHandler = (e) => {
+    const navigate = useNavigate();
+
+    const createGameSubmitHandler = async (e) => {
         e.preventDefault();
 
         const gameData = Object.fromEntries(new FormData(e.currentTarget));
         console.log(gameData);
 
+        try {
+
+            await gammeService.create(gameData);
+            navigate('/games');
+
+        } catch (error) {
+            console.log(error);
+        }
+
+
     }
     return (
-        <section id="create-page" clasNames="auth">
+        <section id="create-page" className="auth">
             <form id="create" onSubmit={createGameSubmitHandler}>
                 <div className="container">
 
