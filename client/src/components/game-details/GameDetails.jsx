@@ -6,10 +6,13 @@ import * as commentService from '../../services/commentService';
 export default function GameDetails() {
     const { gameId } = useParams();
     const [game, setGame] = useState({});
+    const [comments, setComments] = useState([]);
     useEffect(() => {
 
         gameService.getOne(gameId)
-            .then(setGame)
+            .then(setGame);
+        commentService.getGameComments(gameId)
+            .then(setComments)
     }, [gameId]);
 
     const addCommentHandler = async (e) => {
@@ -22,8 +25,8 @@ export default function GameDetails() {
             formData.get('username'),
             formData.get('comment')
         );
-        console.log(newComment);
 
+        setComments(state => [...state, newComment]);
     }
 
     return (
@@ -45,14 +48,17 @@ export default function GameDetails() {
                 <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
-                        <li className="comment">
-                            <p>Content: I rate this one quite highly.</p>
-                        </li>
-                        <li className="comment">
-                            <p>Content: The best game.</p>
-                        </li>
+                        {comments.map(({ _id, userName, text }) => (
+                            <li key={_id} className="comment">
+                                <p>{userName} : {text}</p>
+                            </li>
+                        ))}
+
                     </ul>
-                    <p className="no-comment">No comments.</p>
+
+                    {comments.length === 0 &&
+                        <p className="no-comment">No comments.</p>
+                    }
                 </div>
 
 
