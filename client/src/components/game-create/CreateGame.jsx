@@ -1,5 +1,6 @@
 import * as gammeService from '../../services/gameService';
 import { useNavigate } from 'react-router-dom';
+
 export default function CreateGame() {
 
     const navigate = useNavigate();
@@ -8,7 +9,6 @@ export default function CreateGame() {
         e.preventDefault();
 
         const gameData = Object.fromEntries(new FormData(e.currentTarget));
-        console.log(gameData);
 
         try {
 

@@ -19,7 +19,7 @@ export default function GameList() {
             {console.log(games)}
 
             {games.map((game) => (
-                <GameListItem key={game.id} {...game} />
+                <GameListItem key={game._id} {...game} />
             ))}
 
             {games.length === 0 && <h3 className="no-articles">No articles yet</h3>}
