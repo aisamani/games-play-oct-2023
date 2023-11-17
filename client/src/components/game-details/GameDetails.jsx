@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as gameService from '../../services/gameService';
+import * as commentService from '../../services/commentService';
 
 export default function GameDetails() {
     const { gameId } = useParams();
@@ -10,6 +11,20 @@ export default function GameDetails() {
         gameService.getOne(gameId)
             .then(setGame)
     }, [gameId]);
+
+    const addCommentHandler = async (e) => {
+
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const newComment = await commentService.create(
+            gameId,
+            formData.get('username'),
+            formData.get('comment')
+        );
+        console.log(newComment);
+
+    }
 
     return (
         <section id="game-details">
@@ -27,7 +42,7 @@ export default function GameDetails() {
                     {game.summary}
                 </p>
 
-                {/* <div className="details-comments">
+                <div className="details-comments">
                     <h2>Comments:</h2>
                     <ul>
                         <li className="comment">
@@ -41,19 +56,19 @@ export default function GameDetails() {
                 </div>
 
 
-                <div className="buttons">
+                {/* <div className="buttons">
                     <a href="#" className="button">Edit</a>
                     <a href="#" className="button">Delete</a>
-                </div> */}
+                </div>  */}
             </div>
-
-            {/* <article className="create-comment">
+            <article className="create-comment">
                 <label>Add new comment:</label>
-                <form className="form">
+                <form className="form" onSubmit={addCommentHandler}>
+                    <input name="username" type="text" placeholder="username" />
                     <textarea name="comment" placeholder="Comment......"></textarea>
                     <input className="btn submit" type="submit" value="Add Comment" />
                 </form>
-            </article>  */}
+            </article>
 
         </section>
 
