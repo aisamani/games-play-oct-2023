@@ -37,7 +37,7 @@ export default function Login() {
                     <input
                         type="password"
                         id="login-password"
-                        name={LoginFormKeys.password}
+                        name={LoginFormKeys.Password}
                         onChange={onChange}
                         value={values[LoginFormKeys.Password]}
                     />
