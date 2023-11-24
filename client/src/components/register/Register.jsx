@@ -32,6 +32,7 @@ export default function Register() {
                         id="email"
                         name={RegisterFormKeys.Email}
                         placeholder="maria@email.com"
+                        onChange={onChange}
                         values={values[RegisterFormKeys.Email]}
                     />
 

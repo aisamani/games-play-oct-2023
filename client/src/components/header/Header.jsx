@@ -6,7 +6,7 @@ export default function Header() {
 
     const {
         isAuthenticated,
-        username,
+        email,
     } = useContext(AuthContext);
 
     return (
@@ -21,7 +21,7 @@ export default function Header() {
                     <div id="user">
                         <Link to="/games/create">Create Game </Link>
                         <Link to="/logout">Logout</Link>
-                        <span>| {username}</span>
+                        <span>| {email}</span>
 
                     </div>
                 )}
