@@ -19,5 +19,6 @@ export const getGameComments = async (gameId) => {
         where: `gameId="${gameId}"`
     });
     const gameComments = await request.get(`${baseUrl}`);
+    //temp solution , resolve with collections
     return Object.values(gameComments).filter(comment => comment.gameId === gameId);
 }

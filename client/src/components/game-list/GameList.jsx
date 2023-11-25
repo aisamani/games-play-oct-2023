@@ -16,8 +16,6 @@ export default function GameList() {
         <section id="catalog-page">
             <h1>All Games</h1>
 
-            {console.log(games)}
-
             {games.map((game) => (
                 <GameListItem key={game._id} {...game} />
             ))}
