@@ -2,9 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as gameService from '../../services/gameService';
 import * as commentService from '../../services/commentService';
+import AuthContext from "../../contexts/authContext";
 
 export default function GameDetails() {
-    const { email } = useContext(authContext);
+    const { email } = useContext(AuthContext);
     const { gameId } = useParams();
     const [game, setGame] = useState({});
     const [comments, setComments] = useState([]);
@@ -30,9 +31,11 @@ export default function GameDetails() {
             formData.get('comment')
         );
 
-        console.log(newComment);
 
-        setComments(state => [...state, { ...newComment, author: email }]);
+
+        setComments(state => [...state, { ...newComment, owner: { email } }]);
+
+        console.log(comments);
     }
 
     return (
