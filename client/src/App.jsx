@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 
-import AuthContext from "./contexts/authContext";
+import { AuthProvider } from "./contexts/authContext";
 import * as authService from './services/authService';
 import Path from "./paths";
 
@@ -56,7 +56,7 @@ function App() {
 
     return (
         <div id="box">
-            <AuthContext.Provider value={values}>
+            <AuthProvider value={values}>
                 <Header />
                 <Routes>
                     <Route path={Path.Home} element={<Home />} />
@@ -67,7 +67,7 @@ function App() {
                     <Route path="/games/:gameId" element={<GameDetails />} />
                     <Route path={Path.Logout} element={<Logout />} />
                 </Routes>
-            </AuthContext.Provider>
+            </AuthProvider>
         </div>
     )
 }
