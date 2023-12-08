@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3030/jsonstore/games';
+const baseUrl = 'http://localhost:3030/data/games';
 import * as request from "../lib/request";
 
 
@@ -12,7 +12,12 @@ export const getAll = async () => {
 
 export const getOne = async (gameId) => {
 
-    const result = await request.get(`${baseUrl}/${gameId}`);
+    const query = new URLSearchParams({
+        load: `owner=_ownerId:users`,
+    });
+
+    console.log(`${baseUrl}/${query}`);
+    const result = await request.get(`${baseUrl}/${gameId}?${query}`);
     return result;
 }
 
